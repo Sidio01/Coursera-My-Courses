@@ -1,5 +1,4 @@
 import asyncio
-from collections import defaultdict
 
 
 def run_server(host, port):
@@ -20,8 +19,7 @@ def run_server(host, port):
 
 
 class ClientServerProtocol(asyncio.Protocol):
-    storage = defaultdict(set)
-    timestamp_dict = defaultdict(set)
+    storage = {}
 
     def __init__(self):
         super().__init__()
@@ -44,61 +42,53 @@ class ClientServerProtocol(asyncio.Protocol):
                 return 'error\nwrong command\n\n'
             else:
                 ret = 'ok\n'
-
             if command == 'get':
                 if len(data_splitted) != 2:
                     return 'error\nwrong command\n\n'
                 key = data_splitted[1]
                 if key != '*' and key not in ClientServerProtocol.storage:
-                    return 'error\nwrong command\n\n'
+                    return 'ok\n\n'
                 ret += self.get(key)
             elif command == 'put':
                 try:
                     value = float(data_splitted[2])
                     timestamp = int(data_splitted[3])
-                except ValueError:
+                except:
                     return 'error\nwrong command\n\n'
                 if len(data_splitted) != 4:
                     return 'error\nwrong command\n\n'
                 metric = data_splitted[1:]
                 self.put(metric)
                 ret += '\n'
-
             return ret
-
-        except IndexError:
+        except:
             return 'error\nwrong command\n\n'
 
     def get(self, key):
         ret = ''
         if key == '*':
-            for k, values in ClientServerProtocol.storage.items():
-                for v1, v2 in values:
-                    ret += '{} {} {}\n'.format(k, str(float(v1)), v2)
+            for key, value in ClientServerProtocol.storage.items():
+                for v in sorted(value):
+                    ret += '%s %s %s\n' % (key, float(value[v]), v)
             ret += '\n'
-
+            return ret
         else:
-            retl = [' '.join([key, str(float(v1)), v2]) + '\n' for (v1, v2) in ClientServerProtocol.storage[key]]
-            ret = ''.join(retl) + '\n'
-        return ret
+            values = ClientServerProtocol.storage.get(key)
+            if values:
+                for v in sorted(values):
+                    ret += '%s %s %s\n' % (key, float(values[v]), v)
+                ret += '\n'
+                return ret
+            else:
+                return 'ok\n\n'
 
     def put(self, metric):
         k, v1, v2 = metric
-        try:
-            if v2 not in ClientServerProtocol.timestamp_dict[k]:
-                ClientServerProtocol.storage[k].add((v1, v2))
-                ClientServerProtocol.timestamp_dict[k].add(v2)
-            else:
-                for _ in ClientServerProtocol.storage[k]:
-                    if v2 == _[1]:
-                        ClientServerProtocol.storage[k].remove(_)
-                        break
-                ClientServerProtocol.storage[k].add((v1, v2))
-            # print(ClientServerProtocol.storage)
-            # print(ClientServerProtocol.timestamp_dict)
-        except KeyError:
-            ClientServerProtocol.storage[k].add((v1, v2))
-            ClientServerProtocol.timestamp_dict[k] = set(v2)
+        if k not in ClientServerProtocol.storage:
+            ClientServerProtocol.storage[k] = {}
+            ClientServerProtocol.storage[k].update({v2: v1})
+        else:
+            ClientServerProtocol.storage[k].update({v2: v1})
 
 
-run_server('127.0.0.1', 8181)
+# run_server('127.0.0.1', 8181)
