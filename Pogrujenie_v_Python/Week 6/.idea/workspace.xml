@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1d87ec14-026e-4ddb-8ebe-47d9317a1532" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../../.idea/Coursera.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Week 6.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Week 6.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +31,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../Fifa-20-Icon-Draw" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.server">
@@ -146,8 +144,8 @@
       <item itemvalue="Python.Week 6" />
       <item itemvalue="Python.client" />
       <item itemvalue="Python.server" />
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.support_script" />
+      <item itemvalue="Python.test" />
     </list>
     <recent_temporary>
       <list>
@@ -192,10 +190,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="643" y="250" width="624" height="533" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584473289586" />
-    <state x="743" y="286" width="424" height="479" key="FileChooserDialogImpl" timestamp="1584648221761">
+    <state x="743" y="286" width="424" height="479" key="FileChooserDialogImpl" timestamp="1585135172790">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="743" y="286" width="424" height="479" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1584648221761" />
+    <state x="743" y="286" width="424" height="479" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585135172790" />
     <state width="1899" height="276" key="GridCell.Tab.0.bottom" timestamp="1585076086855">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -228,17 +226,17 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="341" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585076085894" />
-    <state x="643" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1584644935953">
+    <state x="643" y="346" key="com.intellij.ide.util.TipDialog" timestamp="1585135049841">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="643" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584644935953" />
+    <state x="643" y="346" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585135049841" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/server.py</url>
-          <line>67</line>
+          <line>63</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
