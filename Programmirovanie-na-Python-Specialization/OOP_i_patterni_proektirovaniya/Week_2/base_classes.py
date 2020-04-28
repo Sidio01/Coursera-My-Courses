@@ -1,12 +1,8 @@
 import math
+from abc import ABC, abstractmethod
 
 
-class Base:
-
-    pass
-
-
-class A:
+class Base(ABC):
     def __init__(self, data, result):
         self.data = data
         self.result = result
@@ -14,6 +10,16 @@ class A:
     def get_answer(self):
         return [int(x >= 0.5) for x in self.data]
 
+    @abstractmethod
+    def get_score(self):
+        pass
+
+    @abstractmethod
+    def get_loss(self):
+        pass
+
+
+class A(Base):
     def get_score(self):
         ans = self.get_answer()
         return sum([int(x == y) for (x, y) in zip(ans, self.result)]) \
@@ -24,20 +30,7 @@ class A:
             [(x - y) * (x - y) for (x, y) in zip(self.data, self.result)])
 
 
-class B:
-    def __init__(self, data, result):
-        self.data = data
-        self.result = result
-
-    def get_answer(self):
-        return [int(x >= 0.5) for x in self.data]
-
-    def get_loss(self):
-        return -sum([
-            y * math.log(x) + (1 - y) * math.log(1 - x)
-            for (x, y) in zip(self.data, self.result)
-        ])
-
+class B(Base):
     def get_pre(self):
         ans = self.get_answer()
         res = [int(x == 1 and y == 1) for (x, y) in zip(ans, self.result)]
@@ -53,15 +46,14 @@ class B:
         rec = self.get_rec()
         return 2 * pre * rec / (pre + rec)
 
+    def get_loss(self):
+        return -sum([
+            y * math.log(x) + (1 - y) * math.log(1 - x)
+            for (x, y) in zip(self.data, self.result)
+        ])
 
-class C:
-    def __init__(self, data, result):
-        self.data = data
-        self.result = result
 
-    def get_answer(self):
-        return [int(x >= 0.5) for x in self.data]
-
+class C(Base):
     def get_score(self):
         ans = self.get_answer()
         return sum([int(x == y) for (x, y) in zip(ans, self.result)]) \
@@ -69,3 +61,10 @@ class C:
 
     def get_loss(self):
         return sum([abs(x - y) for (x, y) in zip(self.data, self.result)])
+
+
+# a = A((1, 2), (2, 3))
+# print(a.get_answer())
+# print(a.get_loss())
+# b = B((1, 2), (2, 3))
+# print(b.get_loss())
