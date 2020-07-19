@@ -3,8 +3,6 @@ from decimal import Decimal
 import requests
 
 
-# TODO добавить в функцию в качестве последнего параметра requests
-# response = requests.get()  # Использовать переданный requests
 def convert(amount, cur_from, cur_to, date, requests):
     response = requests.get(f'http://www.cbr.ru/scripts/XML_daily.asp?date_req={date}')
     soup = BeautifulSoup(response.content, 'xml')
