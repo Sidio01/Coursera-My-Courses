@@ -1,9 +1,6 @@
 .idea
 *.csv
 venv
+env
+.vscode
 __pycache__
-NN/.idea
-NN/.idea/workspace.xml
-Programmirovanie-na-Python-Specialization/sozdanie_web-servisov_na_python/week_2/.idea/misc.xml
-Programmirovanie-na-Python-Specialization/sozdanie_web-servisov_na_python/week_2/.idea/week_2.iml
-stepik/osnovi_statistiki/.vscode
