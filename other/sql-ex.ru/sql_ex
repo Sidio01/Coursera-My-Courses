@@ -188,3 +188,76 @@ GROUP BY maker
 Exercise: 22 (Serge I: 2003-02-13)
 For each value of PC speed that exceeds 600 MHz, find out the average price of PCs with identical speeds.
 Result set: speed, average price.
+
+SELECT speed, AVG(price) AS Avg_price
+FROM PC
+WHERE speed > 600
+GROUP BY speed
+
+Exercise: 23 (Serge I: 2003-02-14)
+Get the makers producing both PCs having a speed of 750 MHz or higher and laptops with a speed of 750 MHz or higher.
+Result set: maker
+
+SELECT maker
+FROM Product AS p
+JOIN Laptop AS l
+ON l.model = p.model AND l.speed >= 750
+INTERSECT
+SELECT maker
+FROM Product AS p
+JOIN PC
+ON PC.model = p.model AND PC.speed >= 750
+
+Exercise: 24 (Serge I: 2003-02-03)
+List the models of any type having the highest price of all products present in the database.
+
+WITH All_products
+AS
+(SELECT model, price FROM PC
+UNION
+SELECT model, price FROM Printer
+UNION
+SELECT model, price FROM Laptop)
+
+SELECT model
+FROM All_products
+WHERE price = (SELECT MAX(price) FROM All_products)
+-----
+SELECT DISTINCT model
+FROM
+(SELECT model, price
+FROM PC
+UNION
+SELECT model, price
+FROM Printer
+UNION
+SELECT model, price
+FROM Laptop) X
+WHERE price >= ALL(SELECT price FROM PC
+		  UNION
+		  SELECT price FROM Laptop
+		  UNION
+		  SELECT price FROM Printer)
+
+Exercise: 25 (Serge I: 2003-02-14)
+Find the printer makers also producing PCs with the lowest RAM capacity and the highest processor speed of all PCs having the lowest RAM capacity.
+Result set: maker.
+
+SELECT DISTINCT maker
+FROM Product AS p
+JOIN PC
+ON PC.model = p.model
+WHERE p.type = 'PC' 
+AND p.maker IN (SELECT maker
+		FROM Product
+		WHERE type = 'Printer')
+AND PC.ram = (SELECT MIN(ram) 
+	      FROM pc)
+AND pc.speed = (SELECT MAX(speed) 
+		FROM pc 
+		WHERE ram = (SELECT MIN(ram) 
+			     FROM pc))
+
+Exercise: 26 (Serge I: 2003-02-14)
+Find out the average price of PCs and laptops produced by maker A.
+Result set: one overall average price for all items.
