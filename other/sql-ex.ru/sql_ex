@@ -261,3 +261,53 @@ AND pc.speed = (SELECT MAX(speed)
 Exercise: 26 (Serge I: 2003-02-14)
 Find out the average price of PCs and laptops produced by maker A.
 Result set: one overall average price for all items.
+
+SELECT AVG(price) AS AVG_price
+FROM (SELECT model, price
+      FROM PC
+      UNION ALL
+      SELECT model, price
+      FROM Laptop) AS p1
+LEFT JOIN Product AS p2
+ON p1.model = p2.model
+WHERE p2.maker = 'A'
+
+Exercise: 27 (Serge I: 2003-02-03)
+Find out the average hard disk drive capacity of PCs produced by makers who also manufacture printers.
+Result set: maker, average HDD capacity.
+
+SELECT maker, AVG(hd)
+FROM (SELECT *
+FROM Product
+WHERE type = 'PC' AND maker IN (SELECT maker FROM Product WHERE type = 'Printer')) AS p
+JOIN PC
+ON p.model = PC.model
+GROUP BY maker
+
+Exercise: 28 (Serge I: 2012-05-04)
+Using Product table, find out the number of makers who produce only one model.
+
+SELECT COUNT(qty) as qty
+FROM (SELECT COUNT(maker) AS qty
+FROM Product
+GROUP BY maker
+HAVING COUNT(model) = 1) X
+
+Exercise: 29 (Serge I: 2003-02-14)
+Under the assumption that receipts of money (inc) and payouts (out) are registered not more than once a day for each collection point [i.e. the primary key consists of (point, date)], write a query displaying cash flow data (point, date, income, expense).
+Use Income_o and Outcome_o tables.
+
+SELECT i.point, i.date, inc, out
+FROM Income_o AS i
+LEFT JOIN Outcome_o AS o
+ON i.point = o.point AND i.date = o.date
+UNION
+SELECT o.point, o.date, inc, out
+FROM Income_o AS i
+RIGHT JOIN Outcome_o AS o
+ON i.point = o.point AND i.date = o.date
+
+Exercise: 30 (Serge I: 2003-02-14)
+Under the assumption that receipts of money (inc) and payouts (out) can be registered any number of times a day for each collection point [i.e. the code column is the primary key], display a table with one corresponding row for each operating date of each collection point.
+Result set: point, date, total payout per day (out), total money intake per day (inc).
+Missing values are considered to be NULL.
