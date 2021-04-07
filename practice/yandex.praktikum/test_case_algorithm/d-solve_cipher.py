@@ -23,28 +23,34 @@
 
 
 import re
+from icecream import ic
 
 with open('input.txt', 'r') as input:
     matrix = []
+    result = []
+
     for line in input.readlines():
         matrix.append(re.split('\s', line)[:-1])
     size = int(matrix[0][0])
     middle = (size // 2)
-    for i in matrix[1:]:
-        pass
-    print(matrix[1:], middle)
+    matrix = matrix[1:]
+    result.append(matrix[middle][middle])
+
+    for i in range(middle):
+        for j in matrix[]
+
+    ic(matrix, middle, size, result)
     result = 'answer'
     with open('output.txt', 'w') as output:
         output.write(result)
 
 """
-1 1
-0 1
-0 2
-1 2
-2 2
-2 1
-2 0
-1 0
-0 0
+0 1  x-1 x
+0 2  x-1 x+1
+1 2  x   x+1
+2 2  x+1 x+1
+2 1  x+1 x
+2 0  x+1 x-1
+1 0  x   x-1
+0 0  x-1 x-1
 """
